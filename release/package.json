@@ -1,0 +1,16 @@
+{
+  "name": "@min-infograph/core",
+  "version": "0.2.0",
+  "description": "Render Min Infograph documents in React apps and static websites",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": { "types": "./index.d.ts", "import": "./index.js" },
+    "./styles.css": "./styles.css"
+  },
+  "files": ["*.js", "*.css", "*.d.ts", "ir", "renderer"],
+  "sideEffects": ["./styles.css"],
+  "peerDependencies": { "react": ">=18", "react-dom": ">=18" },
+  "license": "MIT"
+}

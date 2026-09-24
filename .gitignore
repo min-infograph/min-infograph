@@ -5,5 +5,7 @@ node_modules/
 apps/workbench/test-results/
 apps/workbench/playwright-report/
 apps/workbench/artifacts/
+release/out/
+apps/workbench/public/core/
 
 /corepack/
