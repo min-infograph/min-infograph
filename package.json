@@ -11,6 +11,7 @@
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "release:package": "pnpm build && node release/build.mjs",
+    "release:browser-smoke": "node release/browser-smoke.mjs",
     "release:pages": "pnpm release:package && node release/copy-pages.mjs",
     "release:smoke": "node release/smoke.mjs",
     "dev": "pnpm --filter @min-infograph/ir build && pnpm --filter @min-infograph/renderer build && pnpm --filter @min-infograph/workbench dev",

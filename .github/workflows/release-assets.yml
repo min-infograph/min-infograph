@@ -26,6 +26,7 @@ jobs:
       - run: pnpm test
       - run: pnpm release:package
       - run: pnpm release:smoke
+      - run: pnpm release:browser-smoke
       - name: Attach install assets to GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
