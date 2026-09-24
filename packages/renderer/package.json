@@ -4,5 +4,6 @@
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }, "./styles.css": "./dist/styles.css" },
   "scripts": { "build": "tsc -p tsconfig.json && cp src/styles/*.css dist/styles/ && cat src/styles/*.css > dist/styles.css", "typecheck": "tsc -p tsconfig.json --noEmit" },
   "dependencies": { "@min-infograph/ir": "workspace:*", "@phosphor-icons/react": "^2.1.10", "mermaid": "^11.12.0", "react": "^19.1.1" },
-  "peerDependencies": { "react": ">=18" }
+  "peerDependencies": { "react": ">=18" },
+  "devDependencies": { "@types/react": "^19.1.10" }
 }
