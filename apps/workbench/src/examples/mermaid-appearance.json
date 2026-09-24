@@ -1,0 +1,66 @@
+{
+  "version": "0.1",
+  "title": "Shape and Light the Diagram",
+  "subtitle": "Tune Mermaid fonts, geometry, shadows, and glow without editing the SVG.",
+  "style": "technical",
+  "shape": "rounded",
+  "layout": {
+    "type": "grid",
+    "columns": 2
+  },
+  "blocks": [
+    {
+      "id": "shape-showcase",
+      "type": "mermaid",
+      "title": "Emphasis: larger labels, shapes, and light",
+      "span": 2,
+      "emphasis": "high",
+      "diagram": "flowchart LR\n  Idea[New idea] --> Build[Build a draft]\n  Build --> Choice[Ready to share?]\n  Choice -- Yes --> Share[Share it]\n  Choice -- Revise --> Build",
+      "appearance": {
+        "fontSize": 22,
+        "nodeShapes": {
+          "Build": "hex",
+          "Idea": "stadium",
+          "Choice": "diam",
+          "Share": "rounded"
+        },
+        "nodeEffects": {
+          "Build": "soft-shadow",
+          "Choice": "blue-glow",
+          "Share": "coral-glow"
+        }
+      }
+    },
+    {
+      "id": "compact-showcase",
+      "type": "mermaid",
+      "title": "Compact: same flow, no effects",
+      "span": 2,
+      "diagram": "flowchart LR\n  Idea[New idea] --> Build[Build a draft]\n  Build --> Choice[Ready to share?]\n  Choice -- Yes --> Share[Share it]\n  Choice -- Revise --> Build",
+      "appearance": {
+        "fontSize": 13,
+        "nodeShapes": {
+          "Build": "rect",
+          "Idea": "circle",
+          "Choice": "diam",
+          "Share": "stadium"
+        }
+      }
+    },
+    {
+      "id": "appearance-explainer",
+      "type": "text",
+      "title": "The diagram stays editable",
+      "span": 1,
+      "text": "Font size, node shapes, and node effects live in each Mermaid block’s appearance field. Change the controls or edit JSON to restyle a diagram without modifying its generated SVG."
+    },
+    {
+      "id": "shape-semantics",
+      "type": "callout",
+      "title": "Choose a shape with meaning",
+      "span": 1,
+      "tone": "info",
+      "text": "Try Soft shadow, Blue glow, and Coral glow on the Build node. The first diagram also uses glow on Choice and Share; the second shows the same flow without effects."
+    }
+  ]
+}

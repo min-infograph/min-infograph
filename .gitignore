@@ -1,0 +1,9 @@
+node_modules/
+**/node_modules/
+**/dist/
+*.tsbuildinfo
+apps/workbench/test-results/
+apps/workbench/playwright-report/
+apps/workbench/artifacts/
+
+/corepack/

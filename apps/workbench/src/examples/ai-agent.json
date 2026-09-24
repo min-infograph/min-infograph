@@ -1,0 +1,51 @@
+{
+  "version": "0.1",
+  "title": "Inside an AI Agent",
+  "subtitle": "How a model turns a request into a grounded result",
+  "style": "technical",
+  "layout": {
+    "type": "grid",
+    "columns": 2
+  },
+  "blocks": [
+    {
+      "id": "agent-loop",
+      "type": "mermaid",
+      "title": "The agent loop",
+      "span": 2,
+      "emphasis": "high",
+      "diagram": "flowchart LR\n  U[User goal] --> A[Agent]\n  A --> M[Model plans]\n  M --> D{Need a tool?}\n  D -- Yes --> T[Tool executes]\n  T --> O[Result observed]\n  O --> M\n  D -- No --> R[Answer]"
+    },
+    {
+      "id": "agent-turn-sequence",
+      "type": "mermaid",
+      "title": "A tool-assisted turn",
+      "span": 1,
+      "diagram": "sequenceDiagram\n  actor User\n  participant App\n  participant Model\n  participant Tool\n  User->>App: Goal\n  App->>Model: Decide next step\n  Model-->>App: Tool call\n  App->>Tool: Execute\n  Tool-->>App: Result\n  App->>Model: Observe\n  Model-->>App: Answer\n  App-->>User: Response"
+    },
+    {
+      "id": "agent-safety",
+      "type": "callout",
+      "title": "The application keeps control",
+      "tone": "info",
+      "span": 1,
+      "text": "A tool call is a proposal from the model. The host application checks permissions, validates arguments, applies timeouts, and decides what result returns to the model."
+    },
+    {
+      "id": "agent-stat",
+      "type": "metric",
+      "label": "steps in one agent turn",
+      "value": "4",
+      "detail": "Receive, decide, act, and respond\u2014repeating when the task needs another step.",
+      "span": 1,
+      "emphasis": "high"
+    },
+    {
+      "id": "agent-context",
+      "type": "text",
+      "title": "What shapes the next action",
+      "span": 1,
+      "text": "The agent combines the current request with conversation state, retrieved evidence, system instructions, and tool results. Context is assembled for each model turn; tools extend what the system can observe or do."
+    }
+  ]
+}

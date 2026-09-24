@@ -1,0 +1,6 @@
+{
+  "name": "@min-infograph/cli", "version": "0.1.0", "type": "module",
+  "bin": { "min-infograph": "./src/index.js" },
+  "scripts": { "build": "node --check src/index.js", "typecheck": "node --check src/index.js", "cli": "node src/index.js" },
+  "dependencies": { "@min-infograph/ir": "workspace:*", "playwright": "^1.63.0", "vite": "^7.1.5" }
+}

@@ -1,0 +1,15 @@
+.zoom-pan{width:100%;min-width:0;display:flex;flex-direction:column;gap:10px}
+.zoom-pan-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.zoom-pan-hint{margin:0;color:#70817b;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.02em}
+.zoom-pan-toolbar{position:sticky;top:0;z-index:5;align-self:flex-end;display:flex;align-items:center;gap:5px;padding:5px;background:#f8f9f6eF;border:1px solid #d8ded9;border-radius:8px;box-shadow:0 3px 12px #173e3d12;backdrop-filter:blur(8px)}
+.zoom-pan-toolbar button{height:34px;min-width:36px;padding:0 10px;display:grid;place-items:center;border:1px solid #d8ded9;border-radius:5px;background:#fff;color:#254c49;font-size:19px;line-height:1}
+.zoom-pan-toolbar button:hover{background:#eaf1ec;border-color:#a9c4b9}
+.zoom-pan-toolbar button:focus-visible{outline:3px solid #47877b;outline-offset:2px}
+.zoom-pan-toolbar .zoom-pan-fit{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.03em;min-width:48px}
+.zoom-pan-level{min-width:48px;text-align:center;color:#405d58;font-family:'DM Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums}
+.zoom-pan-divider{height:20px;width:1px;background:#d8ded9;margin:0 3px}
+.zoom-pan-viewport{position:relative;width:100%;height:clamp(360px,78vh,980px);overflow:hidden;background:#e9ece9;border:1px solid #d8ded9;border-radius:8px;touch-action:none;cursor:grab;overscroll-behavior:contain}
+.zoom-pan-viewport.is-dragging{cursor:grabbing;user-select:none}
+.zoom-pan-content{position:absolute;top:0;left:0;width:100%;transform-origin:top left;will-change:transform}
+.zoom-pan-content>.infographic{width:100%;box-shadow:0 12px 34px #18343218}
+@media(max-width:700px){.zoom-pan{gap:8px}.zoom-pan-head{flex-wrap:wrap;padding:0 12px}.zoom-pan-hint{font-size:9px}.zoom-pan-toolbar{margin-left:auto;justify-content:flex-end;padding:4px}.zoom-pan-toolbar button{height:40px;min-width:42px}.zoom-pan-toolbar .zoom-pan-fit{min-width:58px}.zoom-pan-viewport{height:72vh;min-height:300px;max-height:780px;border-radius:0}.zoom-pan-content>.infographic{border-radius:0}}
+@media(prefers-reduced-motion:no-preference){.zoom-pan-toolbar button{transition:background-color .14s ease,border-color .14s ease}}

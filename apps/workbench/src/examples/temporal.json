@@ -1,0 +1,52 @@
+{
+  "version": "0.1",
+  "title": "Temporal: Durable Execution",
+  "subtitle": "Workflow code coordinates work; event history makes progress recoverable",
+  "style": "technical",
+  "layout": {
+    "type": "grid",
+    "columns": 2
+  },
+  "blocks": [
+    {
+      "id": "temporal-architecture",
+      "type": "mermaid",
+      "title": "Core architecture",
+      "span": 2,
+      "emphasis": "high",
+      "diagram": "flowchart LR\n  C[Client] --> S[Temporal service]\n  S --> Q[Task queue]\n  Q --> W[Worker]\n  W -->|Commands| S\n  W -->|Schedule| A[Activity]\n  A -->|Result or failure| S\n  S -->|Event history| W"
+    },
+    {
+      "id": "temporal-sequence",
+      "type": "mermaid",
+      "title": "Workflow task and activity",
+      "span": 1,
+      "diagram": "sequenceDiagram\n  participant Client\n  participant Service as Temporal service\n  participant Worker\n  participant Activity\n  Client->>Service: Start\n  Service->>Worker: History + task\n  Worker->>Service: Schedule activity\n  Service->>Activity: Execute\n  Activity-->>Service: Result or failure\n  Service->>Worker: Updated history\n  Worker->>Service: Complete\n  Service-->>Client: Result"
+    },
+    {
+      "id": "temporal-retry",
+      "type": "callout",
+      "title": "Retries belong at the activity boundary",
+      "tone": "warning",
+      "span": 1,
+      "emphasis": "high",
+      "text": "A failed activity can be retried according to its retry policy. Workflow code replays its recorded history to rebuild state, so workflow logic must be deterministic; external side effects belong in activities."
+    },
+    {
+      "id": "temporal-history",
+      "type": "text",
+      "title": "Why execution survives worker loss",
+      "span": 1,
+      "text": "Workers are replaceable executors. The service persists workflow events, then gives the history to a worker when a workflow task is dispatched. A restarted worker can replay those events and continue from the resulting state without relying on its former process memory."
+    },
+    {
+      "id": "temporal-stat",
+      "type": "metric",
+      "label": "durable event history",
+      "value": "1",
+      "detail": "Recorded events let another worker replay and continue the workflow.",
+      "span": 1,
+      "emphasis": "high"
+    }
+  ]
+}

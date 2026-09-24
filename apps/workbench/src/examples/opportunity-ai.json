@@ -1,0 +1,76 @@
+{
+  "version": "0.1",
+  "title": "From Doing the Same to Unlocking the New",
+  "highlight": "Unlocking the New",
+  "subtitle": "AI isn’t just about doing things faster — it’s about making new things possible.",
+  "style": "opportunity",
+  "shape": "rounded",
+  "layout": { "type": "poster", "columns": 20 },
+  "blocks": [
+    {
+      "type": "poster-visual-card", "id": "automation", "span": 7, "tone": "slate", "index": "1",
+      "title": "Automation", "subtitle": "AI does the work for you.",
+      "summary": "You already know how to do it. AI just executes it.",
+      "image": { "src": "/assets/automation.png", "alt": "Person at a laptop beside a small AI robot", "fit": "contain" },
+      "bullets": ["Same goal, less manual work", "Reduces repetitive tasks", "Example: AI runs your data pipeline"]
+    },
+    {
+      "type": "poster-visual-card", "id": "efficiency", "span": 6, "tone": "blue", "index": "2",
+      "title": "Efficiency", "subtitle": "You do the same, just faster.",
+      "summary": "You already know how to do it. AI makes you much more productive.",
+      "image": { "src": "/assets/efficiency.png", "alt": "Person and AI robot working together at a laptop", "fit": "contain" },
+      "bullets": ["Same goal, much less time and cost", "You stay in control", "Example: 3D developer creates assets faster"]
+    },
+    {
+      "type": "poster-visual-card", "id": "opportunity", "span": 7, "tone": "violet", "index": "3",
+      "title": "Opportunity", "subtitle": "You can now do what wasn’t possible.",
+      "summary": "AI gives you new capabilities, putting previously distant goals within reach.",
+      "image": { "src": "/assets/opportunity.png", "alt": "Delighted person at a laptop beside a screen showing a fantasy game world", "fit": "contain" },
+      "bullets": ["New goals that weren’t practical before", "Expands what individuals can do", "Example: A non-3D developer creates a playable game"]
+    },
+    {
+      "type": "poster-heading", "id": "game-example-title", "span": 20,
+      "title": "Example: Creating a 3D Game with AI", "note": "Same person. Different possibilities."
+    },
+    {
+      "type": "poster-visual-story", "id": "before-ai", "span": 7, "tone": "slate",
+      "title": "Before AI", "subtitle": "A promising idea can feel out of reach.",
+      "image": { "src": "/assets/before-ai.png", "alt": "Uncertain person facing a laptop while learning 3D game tools", "fit": "contain" },
+      "banner": "Learning + building can outweigh the experiment",
+      "description": "The idea is interesting, but not practical for most people."
+    },
+    {
+      "type": "poster-visual-story", "id": "with-efficiency-ai", "span": 6, "tone": "blue",
+      "title": "With Efficiency AI", "subtitle": "3D developers do it faster.",
+      "image": { "src": "/assets/efficient-3d.png", "alt": "3D developer using AI while designing dragon models on a monitor", "fit": "contain" },
+      "banner": "Expert + AI = higher productivity",
+      "description": "You still need 3D skills, but can produce assets and scenes faster."
+    },
+    {
+      "type": "poster-visual-story", "id": "with-opportunity-ai", "span": 7, "tone": "violet",
+      "title": "With Opportunity AI", "subtitle": "New creators can build 3D games.",
+      "image": { "src": "/assets/opportunity.png", "alt": "New game creator viewing a colorful castle world on a screen", "fit": "contain" },
+      "banner": "New capability unlocked",
+      "description": "You don’t need to be a 3D expert. Idea → describe → playable prototype."
+    },
+    {
+      "type": "poster-feature-strip", "id": "why-it-matters", "span": 15,
+      "title": "Why This Matters",
+      "features": [
+        { "icon": "lightbulb", "title": "More innovation", "text": "Ideas once ignored can now be explored." },
+        { "icon": "users", "title": "More creators", "text": "Capability reaches more people, beyond specialists." },
+        { "icon": "settings", "title": "More software", "text": "More niche tools, games, and personal applications." },
+        { "icon": "globe", "title": "A more creative world", "text": "People can turn imagination into reality." }
+      ]
+    },
+    {
+      "type": "poster-quote", "id": "key-takeaway", "span": 5,
+      "title": "Key Takeaway",
+      "text": "Opportunity AI isn’t just about doing things faster — it gives more people the ability to build a future they couldn’t reach before."
+    },
+    {
+      "type": "poster-footnote", "id": "footer", "span": 20,
+      "left": "From efficiency to entirely new possibilities.", "right": "Same people. More possibilities."
+    }
+  ]
+}

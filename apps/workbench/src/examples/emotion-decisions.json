@@ -1,0 +1,256 @@
+{
+  "version": "0.1",
+  "title": "From Emotion to Better Decisions",
+  "subtitle": "Feel, Understand, Think, Then Act.",
+  "note": "Emotions are signals, not decisions.",
+  "style": "mindful",
+  "shape": "rounded",
+  "layout": {
+    "type": "poster",
+    "columns": 20
+  },
+  "blocks": [
+    {
+      "type": "poster-card",
+      "id": "fast-thinking",
+      "span": 8,
+      "tone": "rose",
+      "title": "System 1 – Fast Thinking",
+      "subtitle": "Automatic · Intuitive · Emotional · Effortless",
+      "icon": "brain",
+      "points": [
+        {
+          "text": "Quick, automatic reactions"
+        },
+        {
+          "text": "Driven by emotion and past experience"
+        },
+        {
+          "lead": "Great for:",
+          "text": "danger, simple choices, familiar situations"
+        },
+        {
+          "lead": "Risk:",
+          "text": "biases, overreactions, short-sighted decisions"
+        }
+      ],
+      "quote": "Helpful for speed. Not always reliable for complex problems."
+    },
+    {
+      "type": "poster-card",
+      "id": "slow-thinking",
+      "span": 8,
+      "tone": "blue",
+      "title": "System 2 – Slow Thinking",
+      "subtitle": "Deliberate · Analytical · Logical · Effortful",
+      "icon": "brain",
+      "points": [
+        {
+          "text": "Slower, more deliberate processing"
+        },
+        {
+          "text": "Uses logic, analysis, and reasoning"
+        },
+        {
+          "lead": "Great for:",
+          "text": "complex problems, important decisions, novel situations"
+        },
+        {
+          "lead": "Requires:",
+          "text": "attention and mental effort"
+        },
+        {
+          "lead": "Benefit:",
+          "text": "more thoughtful, better long-term outcomes"
+        }
+      ],
+      "quote": "Slower, but usually leads to better decisions."
+    },
+    {
+      "type": "poster-insight",
+      "id": "key-idea",
+      "span": 4,
+      "title": "The Key Idea",
+      "icon": "lightbulb",
+      "lead": "Emotional response typically won’t help you solve the problem.",
+      "paragraphs": [
+        "It’s often System 1 — fast, automatic, and reactive.",
+        "When there’s a problem question, try to engage System 2 — slow, deliberate, and analytical."
+      ]
+    },
+    {
+      "type": "poster-flow",
+      "id": "typical-flow",
+      "span": 20,
+      "title": "A Typical Flow",
+      "subtitle": "What often happens vs. what can make a difference.",
+      "lanes": [
+        {
+          "label": "The Usual (Reaction)",
+          "tone": "rose",
+          "stages": [
+            {
+              "icon": "bolt",
+              "label": "Trigger",
+              "detail": "Something happens"
+            },
+            {
+              "icon": "mood_bad",
+              "label": "Emotional response",
+              "detail": "E.g., anger, anxiety"
+            },
+            {
+              "icon": "directions_run",
+              "label": "Immediate action",
+              "detail": "Reaction"
+            },
+            {
+              "icon": "help",
+              "label": "Possible regret",
+              "detail": "Or suboptimal outcome"
+            }
+          ]
+        },
+        {
+          "label": "A Better Approach (Responsive)",
+          "tone": "mint",
+          "stages": [
+            {
+              "icon": "bolt",
+              "label": "Trigger",
+              "detail": "Something happens"
+            },
+            {
+              "icon": "sentiment_satisfied",
+              "label": "Notice emotion",
+              "detail": "A signal, not a decision"
+            },
+            {
+              "icon": "pause",
+              "label": "Pause",
+              "detail": "Create space"
+            },
+            {
+              "icon": "search",
+              "label": "Frame the problem",
+              "detail": "What’s actually going on?"
+            },
+            {
+              "icon": "list",
+              "label": "Explore options",
+              "detail": "Evidence and trade-offs"
+            },
+            {
+              "icon": "check",
+              "label": "Take action",
+              "detail": "Choose the best next step"
+            },
+            {
+              "icon": "bar_chart",
+              "label": "Better outcome",
+              "detail": "Learn and adjust"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "poster-example",
+      "id": "real-world-example",
+      "span": 9,
+      "title": "Real-World Example",
+      "subtitle": "A colleague criticizes your proposal.",
+      "columns": [
+        {
+          "title": "System 1 Reaction",
+          "tone": "rose",
+          "quote": "They just don’t understand.",
+          "points": [
+            "Feel defensive or angry",
+            "Immediately argue back",
+            "Relationship may suffer",
+            "Miss useful feedback"
+          ]
+        },
+        {
+          "title": "System 2 Response",
+          "tone": "blue",
+          "quote": "What are they really concerned about?",
+          "points": [
+            "Notice the emotion",
+            "Clarify the real issue",
+            "Ask questions, gather evidence",
+            "Adjust, explain, or decide not to change",
+            "Better decision and stronger outcome"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "poster-steps",
+      "id": "practical-framework",
+      "span": 7,
+      "title": "A Practical Framework",
+      "subtitle": "When you notice a strong emotional response.",
+      "steps": [
+        {
+          "title": "What am I feeling?",
+          "detail": "Name the emotion (angry, anxious, frustrated)."
+        },
+        {
+          "title": "What is it telling me?",
+          "detail": "What value, goal, or boundary might be affected?"
+        },
+        {
+          "title": "What can I control?",
+          "detail": "Focus on what is within my influence."
+        },
+        {
+          "title": "What are my options?",
+          "detail": "Generate and evaluate possible actions."
+        },
+        {
+          "title": "Take the smallest useful action.",
+          "detail": "Do one thing. Then observe and learn."
+        }
+      ]
+    },
+    {
+      "type": "poster-takeaways",
+      "id": "key-takeaways",
+      "span": 4,
+      "title": "Key Takeaways",
+      "items": [
+        {
+          "icon": "brain",
+          "text": "Emotion is a signal, not a decision."
+        },
+        {
+          "icon": "pause",
+          "text": "Pause creates choice."
+        },
+        {
+          "icon": "settings",
+          "text": "Use System 2 for problem-solving."
+        },
+        {
+          "icon": "target",
+          "text": "Focus on action, not just on feelings."
+        },
+        {
+          "icon": "eco",
+          "text": "If nothing is controllable, accept, let go, and redirect attention."
+        }
+      ]
+    },
+    {
+      "type": "poster-banner",
+      "id": "closing",
+      "span": 20,
+      "icon": "flag",
+      "title": "A Calmer Mind. Better Decisions. A Better You.",
+      "text": "Feel it. Learn from it. Think about it. Do something useful.",
+      "quote": "You can’t always control what happens. But you can choose how you think, and what you do next."
+    }
+  ]
+}
