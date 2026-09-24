@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
-const tarball = resolve(root, 'release/out/assets/min-infograph-core-0.2.0.tgz');
+const tarball = resolve(root, 'release/out/assets/min-infograph-core-0.2.1.tgz');
 const sample = JSON.parse(await readFile(resolve(root, 'apps/workbench/src/examples/ai-agent.json'), 'utf8'));
 const source = `import { render, validateIR } from '@min-infograph/core';\nconst ir = validateIR(${JSON.stringify(sample)});\nif (ir.title !== 'Inside an AI Agent' || typeof render !== 'function') throw new Error('Core package smoke check failed');\nconsole.log('Core package imported and validated a document');\n`;
 

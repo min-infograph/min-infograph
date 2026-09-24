@@ -2,7 +2,9 @@
 
 Min Infograph turns a small JSON document into a composed infographic. Documents stay portable and editable; the renderer builds HTML and Mermaid SVG from the source each time. The current source monorepo carries the original workbench forward, with reusable IR, React widgets, a local CLI, and an authoring skill.
 
-> **Project status:** early open-source foundation. The packages and CLI are usable inside this repository. The CLI currently depends on the monorepo workbench and is a repo-local executable. They are not published to npm yet; package publishing, semantic releases, and a stable `1.0` schema are planned.
+> **Project status:** early open-source foundation. The renderer is installable from the [v0.2.1 GitHub Release](https://github.com/min-infograph/min-infograph/releases/tag/v0.2.1). The CLI currently depends on the monorepo workbench and is a repo-local executable. The package is not yet in the npm registry; a stable `1.0` schema is still planned.
+
+For app and static website integration, start with the [official documentation](https://min-infograph.github.io/docs/) and [release guide](release/README.md). The release tarball installs with npm or pnpm, and a versioned browser bundle supports sites without a build step.
 
 ## Start here
 

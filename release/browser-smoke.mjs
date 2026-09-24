@@ -14,7 +14,7 @@ try {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('about:blank');
-  await page.addScriptTag({ path: resolve(releaseDir, 'out/assets/min-infograph-core-0.2.0.browser.js') });
+  await page.addScriptTag({ path: resolve(releaseDir, 'out/assets/min-infograph-core-0.2.1.browser.js') });
   const result = await page.evaluate((documentJson) => {
     const api = window.MinInfograph;
     if (!api || typeof api.render !== 'function' || typeof api.validateIR !== 'function') {

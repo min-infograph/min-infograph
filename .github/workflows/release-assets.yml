@@ -6,7 +6,7 @@ permissions:
   contents: write
 jobs:
   build-and-attach:
-    if: github.event.release.tag_name == 'v0.2.0'
+    if: github.event.release.tag_name == 'v0.2.1'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

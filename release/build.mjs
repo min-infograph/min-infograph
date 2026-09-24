@@ -8,7 +8,7 @@ const releaseDir = dirname(fileURLToPath(import.meta.url));
 const repoDir = resolve(releaseDir, '..');
 const outDir = resolve(releaseDir, 'out');
 const distDir = resolve(outDir, 'package');
-const version = '0.2.0';
+const version = '0.2.1';
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(distDir, { recursive: true });
@@ -62,7 +62,7 @@ await cp(resolve(distDir, 'browser.js'), resolve(assetDir, `min-infograph-core-$
 await cp(resolve(distDir, 'styles.css'), resolve(assetDir, `min-infograph-core-${version}.styles.css`));
 const packed = spawnSync('npm', ['pack', '--pack-destination', assetDir], { cwd: distDir, encoding: 'utf8' });
 if (packed.status !== 0) throw new Error('npm pack failed');
-const assets = ['min-infograph-core-0.2.0.tgz', 'min-infograph-core-0.2.0.browser.js', 'min-infograph-core-0.2.0.styles.css'];
+const assets = ['min-infograph-core-0.2.1.tgz', 'min-infograph-core-0.2.1.browser.js', 'min-infograph-core-0.2.1.styles.css'];
 const checksums = [];
 for (const asset of assets) {
   const data = await readFile(resolve(assetDir, asset));

@@ -2,22 +2,22 @@
 
 The GitHub Release carries an installable npm tarball and browser assets. The package contains the IR validator, React infographic components, and a `render()` convenience function. It does not include the workbench CLI.
 
-The package release is version `0.2.0`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
+The package release is version `0.2.1`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
 
 ## Install in an app
 
-Install React and React DOM if the app does not already have them, then install the v0.2.0 release tarball:
+Install React and React DOM if the app does not already have them, then install the v0.2.1 release tarball:
 
 ```sh
 npm install react react-dom
-npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.0/min-infograph-core-0.2.0.tgz
+npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.1/min-infograph-core-0.2.1.tgz
 ```
 
 With pnpm:
 
 ```sh
 pnpm add react react-dom
-pnpm add https://github.com/min-infograph/min-infograph/releases/download/v0.2.0/min-infograph-core-0.2.0.tgz
+pnpm add https://github.com/min-infograph/min-infograph/releases/download/v0.2.1/min-infograph-core-0.2.1.tgz
 ```
 
 Import the library styles once. `render()` validates the JSON document, mounts the infographic, and returns an `unmount()` handle. `assetBase` is useful when local `/assets/...` paths are hosted below a site subpath.
@@ -45,12 +45,12 @@ export function Page() { return <Infographic ir={ir} assetBase="/" />; }
 
 ## Use from a static website
 
-The Pages deployment serves same-origin, correctly typed assets at `https://min-infograph.github.io/min-infograph/core/v0.2.0/`. It provides `browser.js` (a self-contained classic script) and `styles.css`.
+The Pages deployment serves same-origin, correctly typed assets at `https://min-infograph.github.io/min-infograph/core/v0.2.1/`. It provides `browser.js` (a self-contained classic script) and `styles.css`.
 
 ```html
-<link rel="stylesheet" href="https://min-infograph.github.io/min-infograph/core/v0.2.0/min-infograph-core-0.2.0.styles.css">
+<link rel="stylesheet" href="https://min-infograph.github.io/min-infograph/core/v0.2.1/min-infograph-core-0.2.1.styles.css">
 <div id="infographic"></div>
-<script src="https://min-infograph.github.io/min-infograph/core/v0.2.0/min-infograph-core-0.2.0.browser.js"></script>
+<script src="https://min-infograph.github.io/min-infograph/core/v0.2.1/min-infograph-core-0.2.1.browser.js"></script>
 <script type="module">
   const response = await fetch('/data/infographic.json');
   const documentJson = await response.json();
