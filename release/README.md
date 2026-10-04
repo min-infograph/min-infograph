@@ -4,6 +4,10 @@ The `@min-infograph/core` package contains the IR validator, React infographic c
 
 The package release is version `0.2.1`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
 
+### Test npm trusted publishing
+
+The **Publish npm package** GitHub Actions workflow can be started manually to exercise OIDC trusted publishing. A manual run checks out the repository's current default branch, builds a unique `0.2.2-oidc-test.<run>.<attempt>` prerelease, runs the release smoke check, and stages it with `npm stage publish`. Staging creates a test version for review; it does not make the package live. Published non-prerelease GitHub Releases continue to publish the version from their release tag directly to the public npm registry.
+
 ## Install in an app
 
 Install React and React DOM if the app does not already have them, then install the npm package:
