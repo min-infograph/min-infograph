@@ -1,24 +1,36 @@
 # `@min-infograph/core` release artifacts
 
-The GitHub Release carries an installable npm tarball and browser assets. The package contains the IR validator, React infographic components, and a `render()` convenience function. It does not include the workbench CLI.
+The `@min-infograph/core` package contains the IR validator, React infographic components, and a `render()` convenience function. It does not include the workbench CLI. Future non-prerelease GitHub Releases publish the package to npm using GitHub Actions OIDC trusted publishing; no npm token is stored in GitHub. The GitHub Release tarball and browser assets remain available as alternate distribution options.
 
 The package release is version `0.2.1`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
 
 ## Install in an app
 
-Install React and React DOM if the app does not already have them, then install the v0.2.1 release tarball:
+Install React and React DOM if the app does not already have them, then install the npm package:
 
 ```sh
 npm install react react-dom
-npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.1/min-infograph-core-0.2.1.tgz
+npm install @min-infograph/core
 ```
 
 With pnpm:
 
 ```sh
 pnpm add react react-dom
-pnpm add https://github.com/min-infograph/min-infograph/releases/download/v0.2.1/min-infograph-core-0.2.1.tgz
+pnpm add @min-infograph/core
 ```
+
+To install a specific version, use for example `npm install @min-infograph/core@0.2.1`.
+
+### GitHub Release alternatives
+
+Each GitHub Release also carries an installable tarball and browser assets. To install the v0.2.1 tarball directly:
+
+```sh
+npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.1/min-infograph-core-0.2.1.tgz
+```
+
+The browser bundle and stylesheet can be downloaded from the release for self-hosting, or used from the GitHub Pages URL below.
 
 Import the library styles once. `render()` validates the JSON document, mounts the infographic, and returns an `unmount()` handle. `assetBase` is useful when local `/assets/...` paths are hosted below a site subpath.
 
@@ -70,4 +82,4 @@ pnpm release:package
 pnpm release:smoke
 ```
 
-The build writes the npm tarball, browser JavaScript, stylesheet, and `SHA256SUMS` to `release/out/assets/`. A GitHub Release workflow attaches those files when a release is published. Publishing a package to the npm registry is not required. The separate `infograph` CLI remains available from a source checkout.
+The build writes the npm tarball, browser JavaScript, stylesheet, and `SHA256SUMS` to `release/out/assets/`. A GitHub Release workflow attaches those files when a release is published, and a separate workflow publishes the package to npm using OIDC trusted publishing. The `infograph` CLI remains available from a source checkout.

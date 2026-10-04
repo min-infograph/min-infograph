@@ -2,6 +2,10 @@
   "name": "@min-infograph/core",
   "version": "0.2.1",
   "description": "Render Min Infograph documents in React apps and static websites",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/min-infograph/min-infograph"
+  },
   "type": "module",
   "main": "./index.js",
   "types": "./index.d.ts",

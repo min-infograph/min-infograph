@@ -8,7 +8,8 @@ const releaseDir = dirname(fileURLToPath(import.meta.url));
 const repoDir = resolve(releaseDir, '..');
 const outDir = resolve(releaseDir, 'out');
 const distDir = resolve(outDir, 'package');
-const version = '0.2.1';
+const sourceManifest = JSON.parse(await readFile(resolve(releaseDir, 'package.json'), 'utf8'));
+const version = process.env.RELEASE_VERSION || sourceManifest.version;
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(distDir, { recursive: true });
@@ -51,7 +52,7 @@ await rewriteDeclarations(distDir);
 const rootDts = `export * from './ir/index.js';\nexport * from './renderer/index.js';\nexport { render } from './render.js';\nexport type { RenderOptions } from './render.js';\n`;
 await writeFile(resolve(distDir, 'index.d.ts'), rootDts);
 await writeFile(resolve(distDir, 'render.d.ts'), `import type { BlockRendererRegistry } from './renderer/index.js';\nexport interface RenderOptions { assetBase?: string; renderers?: BlockRendererRegistry; }\nexport declare function render(container: Element, document: unknown, options?: RenderOptions): { unmount: () => void };\n`);
-const manifest = JSON.parse(await readFile(resolve(releaseDir, 'package.json'), 'utf8'));
+const manifest = { ...sourceManifest, version };
 await writeFile(resolve(distDir, 'package.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 await cp(resolve(repoDir, 'packages/renderer/dist/styles.css'), resolve(distDir, 'styles.css'));
 await cp(resolve(repoDir, 'LICENSE'), resolve(distDir, 'LICENSE'));
@@ -62,7 +63,7 @@ await cp(resolve(distDir, 'browser.js'), resolve(assetDir, `min-infograph-core-$
 await cp(resolve(distDir, 'styles.css'), resolve(assetDir, `min-infograph-core-${version}.styles.css`));
 const packed = spawnSync('npm', ['pack', '--pack-destination', assetDir], { cwd: distDir, encoding: 'utf8' });
 if (packed.status !== 0) throw new Error('npm pack failed');
-const assets = ['min-infograph-core-0.2.1.tgz', 'min-infograph-core-0.2.1.browser.js', 'min-infograph-core-0.2.1.styles.css'];
+const assets = [`min-infograph-core-${version}.tgz`, `min-infograph-core-${version}.browser.js`, `min-infograph-core-${version}.styles.css`];
 const checksums = [];
 for (const asset of assets) {
   const data = await readFile(resolve(assetDir, asset));

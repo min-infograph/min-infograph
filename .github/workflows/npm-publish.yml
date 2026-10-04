@@ -1,0 +1,41 @@
+name: Publish npm package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    if: github.event.release.prerelease == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.6.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Install npm 11.21.0
+        run: npm install --global npm@11.21.0
+      - run: pnpm install --frozen-lockfile
+      - name: Build release package at tag version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          if [ -z "$version" ] || [ "$version" = "$RELEASE_TAG" ]; then
+            echo "Release tag must start with v" >&2
+            exit 1
+          fi
+          RELEASE_VERSION="$version" pnpm release:package
+      - run: pnpm release:smoke
+      - name: Publish with npm trusted publishing
+        working-directory: release/out/package
+        run: npm publish --access public --provenance
