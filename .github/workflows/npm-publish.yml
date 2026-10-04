@@ -51,4 +51,4 @@ jobs:
       - name: Stage OIDC test version for review
         if: github.event_name == 'workflow_dispatch'
         working-directory: release/out/package
-        run: npm stage publish
+        run: npm stage publish --tag oidc-test
