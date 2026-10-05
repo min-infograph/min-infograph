@@ -56,6 +56,7 @@ const manifest = { ...sourceManifest, version };
 await writeFile(resolve(distDir, 'package.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 await cp(resolve(repoDir, 'packages/renderer/dist/styles.css'), resolve(distDir, 'styles.css'));
 await cp(resolve(repoDir, 'LICENSE'), resolve(distDir, 'LICENSE'));
+await cp(resolve(releaseDir, 'README.md'), resolve(distDir, 'README.md'));
 
 const assetDir = resolve(outDir, 'assets');
 await mkdir(assetDir, { recursive: true });

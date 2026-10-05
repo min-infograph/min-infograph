@@ -19,6 +19,17 @@ for (const manager of ['npm', 'pnpm']) {
       : ['add', '--ignore-workspace', tarball];
     const install = spawnSync(manager, args, { cwd: consumer, stdio: 'inherit' });
     if (install.status !== 0) throw new Error(`${manager} consumer install failed`);
+    const readme = await readFile(resolve(consumer, 'node_modules/@min-infograph/core/README.md'), 'utf8');
+    for (const guidance of [
+      'npm install @min-infograph/core',
+      'pnpm add @min-infograph/core',
+      "import { render } from '@min-infograph/core'",
+      "import '@min-infograph/core/styles.css'",
+      'render(mount, documentJson',
+    ]) {
+      if (!readme.includes(guidance)) throw new Error(`${manager} consumer README is missing usage guidance: ${guidance}`);
+    }
+    console.log(`${manager} consumer README contains install and render usage guidance`);
     await writeFile(resolve(consumer, 'smoke.mjs'), source);
     const run = spawnSync('node', ['smoke.mjs'], { cwd: consumer, stdio: 'inherit' });
     if (run.status !== 0) throw new Error(`${manager} consumer import failed`);
