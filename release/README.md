@@ -2,7 +2,7 @@
 
 The `@min-infograph/core` package contains the IR validator, React infographic components, and a `render()` convenience function. It does not include the workbench CLI. Future non-prerelease GitHub Releases publish the package to npm using GitHub Actions OIDC trusted publishing; no npm token is stored in GitHub. The GitHub Release tarball and browser assets remain available as alternate distribution options.
 
-The package release is version `0.2.1`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
+The package release is version `0.2.2`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
 
 ### Test npm trusted publishing
 
@@ -24,14 +24,14 @@ pnpm add react react-dom
 pnpm add @min-infograph/core
 ```
 
-To install a specific version, use for example `npm install @min-infograph/core@0.2.1`.
+To install a specific version, use for example `npm install @min-infograph/core@0.2.2`.
 
 ### GitHub Release alternatives
 
-Each GitHub Release also carries an installable tarball and browser assets. To install the v0.2.1 tarball directly:
+Each GitHub Release also carries an installable tarball and browser assets. To install the v0.2.2 tarball directly:
 
 ```sh
-npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.1/min-infograph-core-0.2.1.tgz
+npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.2/min-infograph-core-0.2.2.tgz
 ```
 
 The browser bundle and stylesheet can be downloaded from the release for self-hosting, or used from the GitHub Pages URL below.
@@ -61,12 +61,12 @@ export function Page() { return <Infographic ir={ir} assetBase="/" />; }
 
 ## Use from a static website
 
-The Pages deployment serves same-origin, correctly typed assets at `https://min-infograph.github.io/min-infograph/core/v0.2.1/`. It provides `browser.js` (a self-contained classic script) and `styles.css`.
+The Pages deployment serves same-origin, correctly typed assets at `https://min-infograph.github.io/min-infograph/core/v0.2.2/`. It provides `browser.js` (a self-contained classic script) and `styles.css`.
 
 ```html
-<link rel="stylesheet" href="https://min-infograph.github.io/min-infograph/core/v0.2.1/min-infograph-core-0.2.1.styles.css">
+<link rel="stylesheet" href="https://min-infograph.github.io/min-infograph/core/v0.2.2/min-infograph-core-0.2.2.styles.css">
 <div id="infographic"></div>
-<script src="https://min-infograph.github.io/min-infograph/core/v0.2.1/min-infograph-core-0.2.1.browser.js"></script>
+<script src="https://min-infograph.github.io/min-infograph/core/v0.2.2/min-infograph-core-0.2.2.browser.js"></script>
 <script type="module">
   const response = await fetch('/data/infographic.json');
   const documentJson = await response.json();
