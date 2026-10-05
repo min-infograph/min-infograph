@@ -136,7 +136,7 @@ export function ZoomPanCanvas({ children, label = 'Infographic preview', classNa
       </div>
     </div>
     <div ref={viewportRef} className={`zoom-pan-viewport${dragging ? ' is-dragging' : ''}`} onWheel={onWheel} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp} role="region" aria-label={`${label}. Drag to pan, use the mouse wheel or pinch to zoom.`}>
-      <div ref={contentRef} className="zoom-pan-content" style={{ transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`, '--zoom-scale': view.scale } as CSSProperties}>{children}</div>
+      <div ref={contentRef} className="zoom-pan-content" style={{ transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`, '--min-infograph-zoom-scale': view.scale } as CSSProperties}>{children}</div>
     </div>
   </section>;
 }

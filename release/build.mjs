@@ -51,7 +51,7 @@ await rewriteDeclarations(distDir);
 
 const rootDts = `export * from './ir/index.js';\nexport * from './renderer/index.js';\nexport { render } from './render.js';\nexport type { RenderOptions } from './render.js';\n`;
 await writeFile(resolve(distDir, 'index.d.ts'), rootDts);
-await writeFile(resolve(distDir, 'render.d.ts'), `import type { BlockRendererRegistry } from './renderer/index.js';\nexport interface RenderOptions { assetBase?: string; renderers?: BlockRendererRegistry; }\nexport declare function render(container: Element, document: unknown, options?: RenderOptions): { unmount: () => void };\n`);
+await writeFile(resolve(distDir, 'render.d.ts'), `import type { BlockRendererRegistry, ThemeOverrides, HeadingLevel } from './renderer/index.js';\nexport interface RenderOptions { assetBase?: string; renderers?: BlockRendererRegistry; theme?: ThemeOverrides; headingLevel?: HeadingLevel; }\nexport declare function render(container: Element, document: unknown, options?: RenderOptions): { unmount: () => void };\n`);
 const manifest = { ...sourceManifest, version };
 await writeFile(resolve(distDir, 'package.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 await cp(resolve(repoDir, 'packages/renderer/dist/styles.css'), resolve(distDir, 'styles.css'));

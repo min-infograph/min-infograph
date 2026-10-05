@@ -1,4 +1,6 @@
+import { Heading } from './Heading.js';
 import { useEffect, useState } from 'react';
+import type { ThemeOverrides } from '../styles/theme.js';
 import { renderMermaid } from '../renderer/renderMermaid.js';
 import type { InfographicShape, MermaidAppearance, TechnicalStyle } from '@min-infograph/ir';
 
@@ -8,15 +10,17 @@ interface Props {
   style: TechnicalStyle;
   shape: InfographicShape;
   appearance?: MermaidAppearance;
+  theme?: ThemeOverrides;
 }
 
-export function MermaidBlock({ diagram, title, style, shape, appearance }: Props) {
+export function MermaidBlock({ diagram, title, style, shape, appearance, theme }: Props) {
   const [result, setResult] = useState<{ svg?: string; error?: string }>({});
-  const [compact, setCompact] = useState(() => window.matchMedia('(max-width: 600px)').matches);
+  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 600px)');
     const onChange = () => setCompact(media.matches);
+    onChange();
     media.addEventListener('change', onChange);
     return () => media.removeEventListener('change', onChange);
   }, []);
@@ -26,12 +30,12 @@ export function MermaidBlock({ diagram, title, style, shape, appearance }: Props
   useEffect(() => {
     let active = true;
     setResult({});
-    renderMermaid(renderDiagram, style, shape, appearance).then(
+    renderMermaid(renderDiagram, style, shape, appearance, theme).then(
       (svg) => active && setResult({ svg }),
       (error: unknown) => active && setResult({ error: error instanceof Error ? error.message : String(error) }),
     );
     return () => { active = false; };
-  }, [renderDiagram, style, shape, appearance]);
+  }, [renderDiagram, style, shape, appearance, theme]);
 
   const kind = diagram.trim().split(/\s|\n/, 1)[0].replace('Diagram', ' diagram');
 
@@ -41,7 +45,7 @@ export function MermaidBlock({ diagram, title, style, shape, appearance }: Props
         <span className="block-kicker"><span className="kicker-dot" /> {kind}</span>
         <span className="block-index">DIAGRAM</span>
       </div>
-      {title && <h2 className="block-heading">{title}</h2>}
+      {title && <Heading depth={1} className="block-heading">{title}</Heading>}
       <div className="diagram-stage" role="img" aria-label={title || `${kind} diagram`}>
         {result.svg && <div className="mermaid-svg" dangerouslySetInnerHTML={{ __html: result.svg }} />}
         {result.error && <p className="diagram-error">Diagram error: {result.error}</p>}

@@ -1,3 +1,4 @@
+import { resolveTheme, type ThemeOverrides } from '../styles/theme.js';
 import { getInfographicStyle } from '../styles/technical.js';
 import type { InfographicShape, MermaidAppearance, TechnicalStyle } from '@min-infograph/ir';
 
@@ -22,15 +23,19 @@ const effectCSS = `
 const effectClasses = { 'soft-shadow': 'forma-shadow', 'blue-glow': 'forma-glow-blue', 'coral-glow': 'forma-glow-coral' } as const;
 
 /** Mermaid owns its SVG. Callers only keep it until the IR changes. */
-export function renderMermaid(diagram: string, style: TechnicalStyle = 'technical', shape: InfographicShape = 'rounded', appearance?: MermaidAppearance): Promise<string> {
+export function renderMermaid(diagram: string, style: TechnicalStyle = 'technical', shape: InfographicShape = 'rounded', appearance?: MermaidAppearance, theme?: ThemeOverrides): Promise<string> {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return Promise.reject(new Error('renderMermaid requires a browser DOM. Render Infographic on the server for a placeholder, then hydrate it to render diagrams.'));
+  }
   const run = async () => {
     const mermaid = await getMermaid();
     // Rendering and configuration share Mermaid's global state, so initialize
     // the requested palette inside the same serialized queue as the render.
-    const config = getInfographicStyle(style).mermaid;
+    const config = resolveTheme(style, theme).mermaid;
     const nodeCorners = shape === 'angular' ? '.node rect { rx: 0; ry: 0; }' : '.node rect { rx: 10px; ry: 10px; }';
     mermaid.initialize({
       ...config,
+      securityLevel: 'strict',
       themeVariables: { ...config.themeVariables, ...(appearance?.fontSize ? { fontSize: `${appearance.fontSize}px` } : {}) },
       themeCSS: `${config.themeCSS}\n${nodeCorners}\n${effectCSS}`,
     });
@@ -54,11 +59,11 @@ export function renderMermaid(diagram: string, style: TechnicalStyle = 'technica
   return result;
 }
 
-export async function measureMermaidRenderTimes(diagram: string, style: TechnicalStyle = 'technical', shape: InfographicShape = 'rounded', appearance?: MermaidAppearance) {
+export async function measureMermaidRenderTimes(diagram: string, style: TechnicalStyle = 'technical', shape: InfographicShape = 'rounded', appearance?: MermaidAppearance, theme?: ThemeOverrides) {
   const result: Record<1 | 5 | 10, number> = { 1: 0, 5: 0, 10: 0 };
   for (const count of [1, 5, 10] as const) {
     const start = performance.now();
-    for (let index = 0; index < count; index++) await renderMermaid(diagram, style, shape, appearance);
+    for (let index = 0; index < count; index++) await renderMermaid(diagram, style, shape, appearance, theme);
     result[count] = Math.round(performance.now() - start);
   }
   return result;

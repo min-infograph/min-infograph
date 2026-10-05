@@ -116,3 +116,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for local checks and changes to the schem
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+Astro hosts can use a React wrapper with `client:visible`: server-rendered diagrams begin as placeholders and become SVG after hydration. See the [Astro, headings, and per-instance theme guide](release/README.md#astro-and-react-server-rendering). Renderer CSS is scoped and does not load fonts or reset the host page.

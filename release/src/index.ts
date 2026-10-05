@@ -4,10 +4,12 @@ export * from '../../packages/renderer/src/index.js';
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { validateIR } from '../../packages/ir/src/index.js';
-import { Infographic, type BlockRendererRegistry } from '../../packages/renderer/src/index.js';
+import { Infographic, type BlockRendererRegistry, type ThemeOverrides, type HeadingLevel } from '../../packages/renderer/src/index.js';
 
 export interface RenderOptions {
   assetBase?: string;
+  theme?: ThemeOverrides;
+  headingLevel?: HeadingLevel;
   renderers?: BlockRendererRegistry;
 }
 

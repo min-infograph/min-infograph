@@ -5,3 +5,7 @@ export { renderMermaid } from './renderer/renderMermaid.js';
 export { measureMermaidRenderTimes } from './renderer/renderMermaid.js';
 export type { BlockRenderContext, CustomBlockRenderer, BlockRendererRegistry } from './components/Infographic.js';
 export type * from '@min-infograph/ir';
+export type { InfographicProps } from './components/Infographic.js';
+export type { PosterInfographicProps } from './components/PosterInfographic.js';
+export type { HeadingLevel } from './components/Heading.js';
+export type { ThemeOverrides, MermaidPalette } from './styles/theme.js';
