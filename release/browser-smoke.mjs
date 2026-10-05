@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const releaseDir = dirname(fileURLToPath(import.meta.url));
 const repoDir = resolve(releaseDir, '..');
+const { version } = JSON.parse(await readFile(resolve(releaseDir, 'out/package/package.json'), 'utf8'));
 const requireWorkbench = createRequire(resolve(repoDir, 'apps/workbench/package.json'));
 const { chromium } = requireWorkbench('@playwright/test');
 const sample = JSON.parse(await readFile(resolve(repoDir, 'apps/workbench/src/examples/ai-agent.json'), 'utf8'));
@@ -14,7 +15,7 @@ try {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('about:blank');
-  await page.addScriptTag({ path: resolve(releaseDir, 'out/assets/min-infograph-core-0.2.1.browser.js') });
+  await page.addScriptTag({ path: resolve(releaseDir, `out/assets/min-infograph-core-${version}.browser.js`) });
   const result = await page.evaluate((documentJson) => {
     const api = window.MinInfograph;
     if (!api || typeof api.render !== 'function' || typeof api.validateIR !== 'function') {
