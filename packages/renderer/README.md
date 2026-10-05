@@ -32,7 +32,7 @@ export default function InfographicIsland(props: InfographicProps) {
 ---
 // src/pages/guide.astro
 import InfographicIsland from '../components/InfographicIsland';
-import { validateIR } from '@min-infograph/renderer';
+import { validateIR } from '@min-infograph/ir';
 import '@min-infograph/renderer/styles.css';
 import documentJson from '../data/guide.json';
 const ir = validateIR(documentJson);
