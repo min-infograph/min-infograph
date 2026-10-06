@@ -17,4 +17,3 @@ export interface ThemeOverrides {
   spacing?: { blockGap?: string; padding?: string };
   mermaid?: MermaidPalette;
 }
-
