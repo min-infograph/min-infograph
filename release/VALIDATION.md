@@ -1,5 +1,17 @@
 # 0.3.0 candidate validation
 
+## Registry readiness follow-up (2026-10-07)
+
+Publishing-only candidate based on merged main `2c481f4`, with source/package versions and existing tags unchanged. Node 24.12.0 and pnpm 12.6.0 were used. Locked dependencies were installed with lifecycle scripts disabled; no live publish or registry readiness probe was performed.
+
+- `pnpm release:policy-test`: all 21 policy and registry tests passed. Injected metadata, clocks and sleep functions cover pending-to-ready beyond 30 seconds, the ten-minute deadline and actionable timeout, request budgets and aborts during fetch/body reads, transient/permanent HTTP and network failures, immediate integrity conflicts, delayed dist-tags, channel rollback prevention, both-package preflight, identical-artifact retries, dry-run behavior, and absence of repeated publish/tag mutations during polling. No real polling waits or registry requests occur in these tests.
+- `node --check` for every `release/*.mjs`: passed.
+- Whole-candidate diff review and `git diff --check`: passed, including new modules and tests. Changes are limited to release publishing, release test wiring and documentation; renderer checks were unnecessary for this scope.
+
+The exact-tag checkout in the hosted workflow still uses the script committed at `v0.3.0`; this candidate cannot retrofit that immutable tag. Recovery guidance in `release/README.md` distinguishes acceptance from visibility and documents the need for separately reviewed tooling if recovering that release with patched polling. No integration, push, publish or tag changes were performed.
+
+## Original release candidate validation
+
 Validated in the isolated worktree on 2026-10-07 with Node 24.12.0, npm 11.21.0 and pnpm 12.6.0. The host default npm was 11.6.2; release checks used npm 11.21.0 installed in `/tmp/min-infograph-release-tools`, with its bin directory prepended to PATH. No credentials were read or printed, and no npm publish, tag creation, push or integration was performed.
 
 | Command | Outcome |
