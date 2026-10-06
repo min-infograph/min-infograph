@@ -15,6 +15,7 @@ try {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('about:blank');
+  await page.addStyleTag({ path: resolve(releaseDir, 'out/package/styles.css') });
   await page.addScriptTag({ path: resolve(releaseDir, `out/assets/min-infograph-core-${version}.browser.js`) });
   const result = await page.evaluate((documentJson) => {
     const api = window.MinInfograph;
@@ -27,6 +28,9 @@ try {
     return api.validateIR(documentJson).title;
   }, sample);
   await page.getByText('Inside an AI Agent').first().waitFor();
+  await page.waitForFunction(() => [...document.querySelectorAll('.diagram-stage')].every(stage => stage.querySelector('.mermaid-svg svg, .diagram-error')), null, { timeout: 60000 });
+  const expectedDiagrams = sample.blocks.filter(block => block.type === 'mermaid').length;
+  if (await page.locator('.mermaid-svg svg').count() !== expectedDiagrams || await page.locator('.diagram-error').count()) throw new Error('Browser bundle diagrams failed');
   if (result !== 'Inside an AI Agent' || errors.length) {
     throw new Error(`Browser bundle failed: ${errors.join('; ')}`);
   }

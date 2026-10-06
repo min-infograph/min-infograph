@@ -1,6 +1,6 @@
 import { Heading } from './Heading.js';
 import { useEffect, useState } from 'react';
-import type { ThemeOverrides } from '../styles/theme.js';
+import type { ThemeOverrides } from '../styles/theme-types.js';
 import { renderMermaid } from '../renderer/renderMermaid.js';
 import type { InfographicShape, MermaidAppearance, TechnicalStyle } from '@min-infograph/ir';
 

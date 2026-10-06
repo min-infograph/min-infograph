@@ -1,5 +1,7 @@
 # `@min-infograph/renderer`
 
+Private workspace implementation package. npm consumers use `@min-infograph/core`; the imports below describe source development inside this monorepo.
+
 React components for rendering validated `InfographicIR` documents. The package includes the original workbench styles, Mermaid SVG rendering and styling, poster widgets, local image handling, and zoom/pan controls.
 
 ```tsx

@@ -1,0 +1,12 @@
+import { readFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+const { version } = JSON.parse(await readFile(new URL('../package.json', import.meta.url)));
+const cli = JSON.parse(await readFile(new URL('../packages/cli/package.json', import.meta.url)));
+const tag = process.env.RELEASE_TAG;
+const { checkVersion } = await import('./policy.mjs');
+const channel = checkVersion(version, cli.version, tag, process.env.RELEASE_PRERELEASE);
+execFileSync('git', ['check-ref-format', `refs/tags/${tag}`]);
+const commit = execFileSync('git', ['rev-parse', `refs/tags/${tag}^{commit}`], { encoding: 'utf8' }).trim();
+const head = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+if (commit !== head) throw new Error('HEAD must be the exact existing release tag commit');
+console.log(`Validated ${tag} (${channel}) at ${head}`);

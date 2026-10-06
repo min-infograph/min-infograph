@@ -166,12 +166,24 @@ importers:
 
   .:
     devDependencies:
+      '@types/react':
+        specifier: ^19.1.10
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.1.7
+        version: 19.3.0(@types/react@19.3.0)
+      playwright:
+        specifier: 1.63.0
+        version: 1.63.0
       react:
         specifier: ^19.1.1
         version: 19.3.0
       react-dom:
         specifier: ^19.1.1
         version: 19.3.0(react@19.3.0)
+      semver:
+        specifier: 7.7.4
+        version: 7.7.4
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -215,15 +227,9 @@ importers:
 
   packages/cli:
     dependencies:
-      '@min-infograph/ir':
-        specifier: workspace:*
-        version: link:../ir
       playwright:
-        specifier: ^1.63.0
+        specifier: 1.63.0
         version: 1.63.0
-      vite:
-        specifier: ^7.1.5
-        version: 7.3.6
 
   packages/ir: {}
 
@@ -1314,6 +1320,11 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
+  semver@7.7.4:
+    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -2370,6 +2381,8 @@ snapshots:
   scheduler@0.28.0: {}
 
   semver@6.3.1: {}
+
+  semver@7.7.4: {}
 
   source-map-js@1.2.1: {}
 

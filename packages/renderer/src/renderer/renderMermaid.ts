@@ -1,4 +1,5 @@
-import { resolveTheme, type ThemeOverrides } from '../styles/theme.js';
+import { resolveTheme } from '../styles/theme.js';
+import type { ThemeOverrides } from '../styles/theme-types.js';
 import { getInfographicStyle } from '../styles/technical.js';
 import type { InfographicShape, MermaidAppearance, TechnicalStyle } from '@min-infograph/ir';
 

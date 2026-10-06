@@ -1,4 +1,4 @@
-import type { ThemeOverrides } from '../styles/theme.js';
+import type { ThemeOverrides } from '../styles/theme-types.js';
 import { Heading } from './Heading.js';
 import type { InfographicBlock as Block, InfographicShape, TechnicalStyle } from '@min-infograph/ir';
 import { MermaidBlock } from './MermaidBlock.js';
