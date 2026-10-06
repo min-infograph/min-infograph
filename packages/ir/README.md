@@ -1,5 +1,7 @@
 # `@min-infograph/ir`
 
+Private workspace implementation package. npm consumers use `@min-infograph/core`; the imports below describe source development inside this monorepo.
+
 Renderer-independent TypeScript types and strict JSON validation for version `0.1` infographic documents.
 
 ```ts

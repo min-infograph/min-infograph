@@ -17,9 +17,12 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
+      - run: npm install --global npm@11.21.0
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      - run: pnpm release:package
       - run: pnpm --filter @min-infograph/workbench exec playwright install --with-deps chromium
       - run: pnpm test
-      - run: pnpm --filter @min-infograph/cli cli validate apps/workbench/src/examples/ai-agent.json
-      - run: pnpm --filter @min-infograph/cli cli render apps/workbench/src/examples/ai-agent.json /tmp/agent.png
+      - run: pnpm typecheck
+      - run: pnpm release:policy-test
+      - run: pnpm release:smoke
+      - run: pnpm release:browser-smoke

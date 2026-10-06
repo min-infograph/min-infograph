@@ -1,12 +1,18 @@
 # Min Infograph CLI
 
-The current CLI is a repository-local tool. It validates source JSON and exports PNG images using the workbench, Vite, and Playwright Chromium.
+Install from npm with Node.js 22.14+:
 
 ```sh
-pnpm build
-pnpm --filter @min-infograph/workbench exec playwright install chromium
-pnpm infograph validate apps/workbench/src/examples/ai-agent.json
-pnpm infograph render apps/workbench/src/examples/ai-agent.json /tmp/agent.png
+npm install --global @min-infograph/cli
+# or: pnpm add -g @min-infograph/cli
+min-infograph --help
+min-infograph validate ./document.json
+min-infograph install-browser
+min-infograph render ./document.json ./document.png
 ```
 
-`render` waits for Mermaid SVG, local images, and document fonts, then captures the infographic. It currently supports PNG export only. The CLI package depends on the monorepo workbench and is not ready for standalone npm distribution.
+Chromium must be installed explicitly. On Linux, use `min-infograph install-browser --with-deps` for OS libraries. Help and validation work without a browser.
+
+The package contains its validator and browser renderer. It needs no workbench, Vite server or repository files. Local `/assets/...` image paths resolve below `assets/` beside the input JSON; nested PNG/JPEG/WebP paths work. Missing/broken images, escaped asset symlinks and failed diagrams stop rendering. The CLI waits for Mermaid, images and fonts before capturing the infographic as PNG. It closes the ephemeral loopback HTTP server and browser on success and failure.
+
+For source development, build both packages with `pnpm release:package`, then use `pnpm infograph`. Public core and CLI share a release version; IR and renderer are private implementation packages.

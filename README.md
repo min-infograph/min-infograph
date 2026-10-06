@@ -2,38 +2,39 @@
 
 Min Infograph turns a small JSON document into a composed infographic. Documents stay portable and editable; the renderer builds HTML and Mermaid SVG from the source each time. The current source monorepo carries the original workbench forward, with reusable IR, React widgets, a local CLI, and an authoring skill.
 
-> **Project status:** early open-source foundation. The current renderer release is `@min-infograph/core@0.2.2`, with installation details in the [v0.2.2 GitHub Release](https://github.com/min-infograph/min-infograph/releases/tag/v0.2.2). The CLI currently depends on the monorepo workbench and is a repo-local executable. A stable `1.0` schema is still planned.
+The next coordinated release is `@min-infograph/core@0.3.0` and `@min-infograph/cli@0.3.0`. Core `0.2.2` is already on npm; CLI `0.3.0` requires its initial owner bootstrap before automated releases. npm is the primary distribution platform. The JSON schema remains version `0.1`.
 
-For app and static website integration, start with the [official documentation](https://min-infograph.github.io/docs/) and [release guide](release/README.md). The release tarball installs with npm or pnpm, and a versioned browser bundle supports sites without a build step.
+For app and static website integration, see the [official documentation](https://min-infograph.github.io/docs/) and [package and release guide](release/README.md).
 
-## Start here
+## Install and render
 
-Requirements: Node.js 22.14+ and pnpm 12.6.0. Install, build, and start the workbench:
+After 0.3.0 is published, install from npm (Node.js 22.14+):
 
 ```sh
-pnpm install
-pnpm build
-pnpm dev
+npm install @min-infograph/core react react-dom
+npm install --global @min-infograph/cli
+min-infograph --help
+min-infograph validate ./document.json
+min-infograph install-browser
+min-infograph render ./document.json ./document.png
 ```
 
-Choose an example, edit its JSON, switch themes and shapes, and inspect the live result. You can also open a sample directly with `/?example=emotion`, `/?example=opportunity`, or `/?example=mermaid`.
+With pnpm, use `pnpm add @min-infograph/core react react-dom` and `pnpm add -g @min-infograph/cli`. Chromium installation is explicit; on Linux, `min-infograph install-browser --with-deps` can install required OS libraries. Help and validation do not require a browser. PNG rendering waits for Mermaid SVG, images and fonts. `/assets/name.png` resolves to `assets/name.png` beside the input JSON, including nested folders. Missing or broken images fail the render.
 
-### Validate and export an image
+## Develop locally
 
-The CLI validates JSON and can render a PNG through the local workbench and Chromium:
+Use Node.js 24, npm 11.21.0 and pnpm 12.6.0:
 
 ```sh
+pnpm install --frozen-lockfile
+pnpm release:package
+pnpm dev
 pnpm infograph validate apps/workbench/src/examples/ai-agent.json
+pnpm infograph install-browser
 pnpm infograph render apps/workbench/src/examples/ai-agent.json /tmp/agent.png
 ```
 
-The first build is needed so the shared packages are available. Install the Playwright browser once before PNG export:
-
-```sh
-pnpm --filter @min-infograph/workbench exec playwright install chromium
-```
-
-`render` waits for Mermaid diagrams and images, then captures the infographic itself. The CLI does not currently export PDF or raw SVG.
+`pnpm infograph` runs the generated CLI artifact; rebuild it with `pnpm release:package` after changes.
 
 ## Workspace
 
@@ -41,9 +42,12 @@ pnpm --filter @min-infograph/workbench exec playwright install chromium
 | --- | --- |
 | `packages/ir` | TypeScript IR types and strict JSON validation for grid and poster documents. |
 | `packages/renderer` | React renderer, Mermaid styling, zoom and pan, and poster widgets. |
-| `packages/cli` | Local `validate` and Chromium-backed `render` commands. |
+| `packages/cli` | Public npm CLI, built into `release/out/cli` with standalone assets. |
+| `release` | Generated public core package and two-package release tooling. |
 | `apps/workbench` | Migrated editor, preview, examples, assets, and the original browser checks. |
 | `skills/min-infograph-authoring` | Agent skill for writing and validating infographic documents. |
+
+IR, renderer and workbench are private workspace packages; consumers import core, never these unpublished packages. Core bundles their code and rewrites declarations to relative package paths. CLI bundles validation and a self-contained browser renderer, with Playwright as its only runtime dependency.
 
 The site source is deployed from this repository to [min-infograph.github.io/min-infograph](https://min-infograph.github.io/min-infograph/). GitHub Pages builds use the `/min-infograph/` base path; `pnpm pages` reproduces that build locally.
 
@@ -84,12 +88,12 @@ The complete schema and path-specific validation rules live in [`packages/ir/src
 
 ## Build with the renderer
 
-`@min-infograph/renderer` exports `Infographic`, `PosterInfographic`, `ZoomPanCanvas`, Mermaid helpers, block types, and the stylesheet at `@min-infograph/renderer/styles.css`. The application passes a validated `InfographicIR`:
+The public `@min-infograph/core` package exports `Infographic`, `PosterInfographic`, `ZoomPanCanvas`, Mermaid helpers, block types, and the stylesheet at `@min-infograph/renderer/styles.css`. The application passes a validated `InfographicIR`:
 
 ```tsx
-import '@min-infograph/renderer/styles.css';
-import { Infographic } from '@min-infograph/renderer';
-import { validateIR } from '@min-infograph/ir';
+import '@min-infograph/core/styles.css';
+import { Infographic } from '@min-infograph/core';
+import { validateIR } from '@min-infograph/core';
 
 const ir = validateIR(documentJson);
 export function Preview() {

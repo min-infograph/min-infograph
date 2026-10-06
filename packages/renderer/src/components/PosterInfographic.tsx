@@ -1,4 +1,5 @@
-import { themeStyle, type ThemeOverrides } from '../styles/theme.js';
+import { themeStyle } from '../styles/theme.js';
+import type { ThemeOverrides } from '../styles/theme-types.js';
 import { Heading, HeadingContext, type HeadingLevel } from './Heading.js';
 import { useEffect, useState } from 'react';
 import type { PosterBlock, PosterIcon, PosterImage, PosterInfographicIR, PosterTone } from '@min-infograph/ir';

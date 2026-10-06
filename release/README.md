@@ -1,12 +1,6 @@
-# `@min-infograph/core` release artifacts
+# npm packages and releases
 
-The `@min-infograph/core` package contains the IR validator, React infographic components, and a `render()` convenience function. It does not include the workbench CLI. Future non-prerelease GitHub Releases publish the package to npm using GitHub Actions OIDC trusted publishing; no npm token is stored in GitHub. The GitHub Release tarball and browser assets remain available as alternate distribution options.
-
-The package release is version `0.2.2`; the `version: "0.1"` field in infographic JSON identifies the current document format and is independent of the package version.
-
-### Test npm trusted publishing
-
-The **Publish npm package** GitHub Actions workflow can be started manually to exercise OIDC trusted publishing. A manual run checks out the repository's current default branch, builds a unique `0.2.2-oidc-test.<run>.<attempt>` prerelease, runs the release smoke check, and stages it with `npm stage publish`. Manual staging creates a test version for review and leaves the live `latest` version unchanged; first-time staging can create a public placeholder for the package. Published non-prerelease GitHub Releases continue to publish the version from their release tag directly to the public npm registry.
+Core and CLI share the source-controlled root `package.json` version, currently `0.3.0`. CLI manifest must match; core manifest is generated. No environment version override is accepted. Schema version `0.1` is independent. npm is the primary distributor; GitHub Actions artifacts are diagnostics, not installation promises.
 
 ## Install in an app
 
@@ -24,17 +18,7 @@ pnpm add react react-dom
 pnpm add @min-infograph/core
 ```
 
-To install a specific version, use for example `npm install @min-infograph/core@0.2.2`.
-
-### GitHub Release alternatives
-
-Each GitHub Release also carries an installable tarball and browser assets. To install the v0.2.2 tarball directly:
-
-```sh
-npm install https://github.com/min-infograph/min-infograph/releases/download/v0.2.2/min-infograph-core-0.2.2.tgz
-```
-
-The browser bundle and stylesheet can be downloaded from the release for self-hosting, or used from the GitHub Pages URL below.
+After release, pin with `npm install @min-infograph/core@0.3.0`. Core 0.2.2 is the current published stable version until then.
 
 Import the library styles once. `render()` validates the JSON document, mounts the infographic, and returns an `unmount()` handle. `assetBase` is useful when local `/assets/...` paths are hosted below a site subpath.
 
@@ -76,17 +60,47 @@ The Pages deployment serves same-origin, correctly typed assets at `https://min-
 </script>
 ```
 
-`window.MinInfograph` exposes `render(container, documentJson, options?)`, `validateIR(documentJson)`, and the renderer exports. `render()` returns an object with `unmount()`. The Pages URL is suitable for module-free static sites; release assets also include the browser bundle for downloading or self-hosting.
+`window.MinInfograph` exposes `render(container, documentJson, options?)`, `validateIR(documentJson)`, and the renderer exports. `render()` returns an object with `unmount()`. The Pages URL is suitable for module-free static sites; the npm core package also includes `browser.js` and `styles.css` for self-hosting. The Pages build preserves the original 0.2.2 endpoint from its integrity-pinned npm artifact (`release/pages-history.json`). The example uses that existing endpoint; the 0.3.0 endpoint becomes available after the next Pages deployment.
 
-## Build and verify release artifacts
+## CLI
+
+```sh
+npm install --global @min-infograph/cli
+min-infograph --help
+min-infograph install-browser
+min-infograph validate ./document.json
+min-infograph render ./document.json ./output.png
+```
+
+CLI runs independently of repository files. Local `/assets/...` paths map below `assets/` beside the JSON file. Nested PNG/JPEG/WebP assets work; symlinks escaping that directory are rejected. Missing assets and diagram failures produce a nonzero exit. Rendering uses an ephemeral loopback HTTP port and closes Chromium and the server on success and failure. `install-browser --with-deps` is available for Linux browser dependencies. No browser is installed implicitly.
+
+## Maintain and release
+
+1. Update the root `package.json` version and `packages/cli/package.json` together. Stable tags are exactly `vX.Y.Z`; prerelease tags are canonical SemVer such as `v0.3.1-rc.1`. Leading zeroes and build metadata are rejected. Commit source and lockfile before tagging.
+2. Run the checks below. Both tarballs are packed into `release/out/assets/`; core output remains `release/out/package/`. Browser assets and checksums are derived from the same version. The workbench, IR and renderer remain private, unpublished workspace packages.
+3. Complete per-package npm trusted publisher setup below. Create the matching tag and GitHub Release only after review. Its prerelease flag must agree with the version. Publishing a release triggers `.github/workflows/npm-publish.yml`; prereleases use `next`, stable versions use `latest`.
+4. To rehearse, manually dispatch **Publish npm packages** with an existing tag and leave `dry_run` enabled (the default). The exact tag commit is checked out and verified. To retry a partial release, dispatch that tag with dry-run disabled. Never move tags or rebuild changed source under an existing npm version.
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm release:package
+pnpm typecheck
+pnpm --filter @min-infograph/workbench exec playwright install --with-deps chromium
+pnpm test
 pnpm release:smoke
+pnpm release:browser-smoke
+pnpm release:policy-test
 ```
 
-The build writes the npm tarball, browser JavaScript, stylesheet, and `SHA256SUMS` to `release/out/assets/`. A GitHub Release workflow attaches those files when a release is published, and a separate workflow publishes the package to npm using OIDC trusted publishing. The `infograph` CLI remains available from a source checkout.
+The one publish workflow serializes releases and runs build, typechecks, tests, clean npm/pnpm tarball installs, CLI PNG export (diagram and local asset), declarations checks and the browser bundle check before publishing anything. It publishes the exact checked tarballs, core first, CLI second, then verifies registry installs with the same consumer checks. A retry skips only byte-identical already-published artifacts (SHA-512 integrity); conflicts and registry errors stop the run. It restores the appropriate dist-tag if necessary but refuses to roll back a newer version. Publication is not atomic across packages; an interrupted run can leave core published and CLI pending. Retry the same tag to complete it. Diagnostics are uploaded even on failure. There is no separate release-assets workflow or ad hoc OIDC staging.
+
+### npm owner setup and CLI bootstrap
+
+Follow [official npm trusted publisher documentation](https://docs.npmjs.com/trusted-publishers/). Configure each package independently on npmjs.com, with GitHub Actions organization/user `min-infograph`, repository `min-infograph`, workflow filename `npm-publish.yml` (filename only), and no environment unless the existing core identity requires one. Preserve the existing core trusted publisher identity; the workflow keeps that filename and adds no job environment. Confirm its existing settings before release. Allow direct `npm publish` and dist-tag management so retries can repair tags. The workflow uses GitHub-hosted Ubuntu, Node 24, npm 11.21.0 and `id-token: write`; it contains no npm credentials.
+
+`@min-infograph/cli` does not exist yet. An authorized npm scope/account owner must first establish it: after reviewing and validating these exact artifacts, publish the CLI tarball from their own authenticated machine using `npm publish ./release/out/assets/min-infograph-cli-0.3.0.tgz --access public --tag latest`, then configure its trusted publisher in npm package settings. Account login/2FA and scope permissions are owner actions, not tasks for this checkout. Do not put credentials into workflow files or logs. Keep that exact reviewed artifact and tag: the automated release must reproduce the same integrity to skip the bootstrap artifact safely. The initial workflow can then publish core and verify/skip CLI. Alternatively the owner can bootstrap an independently reviewed earlier CLI version before the coordinated 0.3.0 release. Do not use staged placeholder versions as a bootstrap mechanism.
+
+Trusted publishing automatically supplies provenance on supported public repositories. Dist-tag management needs npm 11.21.0 and the trusted publisher's corresponding allowed action. A new publisher configuration must complete its first successful OIDC publish within two days, per npm documentation. Bootstrapping the same version locally and skipping it in CI does not exercise CLI OIDC; configure or refresh that connection when the next actual CLI publish is ready. An absent CLI package/publisher, incorrect core identity, missing scope permissions or disabled direct publishing blocks a live release; local validation and manual dry-run remain available.
 
 ## Astro and React server rendering
 

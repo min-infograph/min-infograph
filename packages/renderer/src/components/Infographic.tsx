@@ -1,6 +1,7 @@
 import { Heading, HeadingContext, type HeadingLevel } from './Heading.js';
 import type { GridInfographicIR, InfographicIR, InfographicBlock as Block, PosterInfographicIR, TechnicalStyle, InfographicShape } from '@min-infograph/ir';
-import { themeStyle, type ThemeOverrides } from '../styles/theme.js';
+import { themeStyle } from '../styles/theme.js';
+import type { ThemeOverrides } from '../styles/theme-types.js';
 import { InfographicBlock } from './InfographicBlock.js';
 import { PosterInfographic } from './PosterInfographic.js';
 import type { ReactNode } from 'react';

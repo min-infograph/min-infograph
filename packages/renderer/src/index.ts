@@ -8,4 +8,4 @@ export type * from '@min-infograph/ir';
 export type { InfographicProps } from './components/Infographic.js';
 export type { PosterInfographicProps } from './components/PosterInfographic.js';
 export type { HeadingLevel } from './components/Heading.js';
-export type { ThemeOverrides, MermaidPalette } from './styles/theme.js';
+export type { ThemeOverrides, MermaidPalette } from './styles/theme-types.js';

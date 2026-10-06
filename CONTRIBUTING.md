@@ -4,8 +4,8 @@ Thanks for helping improve Min Infograph. Issues and pull requests are welcome.
 
 ## Local development
 
-1. Install Node.js 22.14+ and pnpm 12.6.0.
-2. Run `pnpm install` and `pnpm build`.
+1. Install Node.js 24, npm 11.21.0 and pnpm 12.6.0.
+2. Run `pnpm install --frozen-lockfile` and `pnpm release:package`.
 3. Start the editor with `pnpm dev`.
 4. Run `pnpm --filter @min-infograph/workbench check:browser` for browser coverage. Install Chromium first with `pnpm --filter @min-infograph/workbench exec playwright install chromium`.
 
@@ -18,3 +18,5 @@ For a new built-in grid widget, update `InfographicBlock.tsx` and its renderer s
 ## Pull requests
 
 Keep changes focused, describe visible behavior and compatibility impact, and include relevant validation evidence. Run `pnpm build` and the browser check for renderer or workbench changes. Do not commit generated `dist`, `node_modules`, test results, or local screenshots.
+
+Core and CLI are the public npm packages. IR, renderer and workbench are private workspace implementation packages. See [release/README.md](release/README.md) for the shared version, packed consumer checks and maintainer workflow.

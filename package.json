@@ -1,6 +1,6 @@
 {
   "name": "min-infograph",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@12.6.0",
@@ -17,11 +17,16 @@
     "dev": "pnpm --filter @min-infograph/ir build && pnpm --filter @min-infograph/renderer build && pnpm --filter @min-infograph/workbench dev",
     "pages": "pnpm --filter @min-infograph/workbench build:pages",
     "test": "pnpm --filter @min-infograph/workbench check:browser",
-    "infograph": "node packages/cli/src/index.js"
+    "infograph": "node release/out/cli/src/index.js",
+    "release:policy-test": "node --test release/policy.test.mjs"
   },
   "devDependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "semver": "7.7.4",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "playwright": "1.63.0"
   }
 }
