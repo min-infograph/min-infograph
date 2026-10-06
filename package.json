@@ -18,7 +18,7 @@
     "pages": "pnpm --filter @min-infograph/workbench build:pages",
     "test": "pnpm --filter @min-infograph/workbench check:browser",
     "infograph": "node release/out/cli/src/index.js",
-    "release:policy-test": "node --test release/policy.test.mjs"
+    "release:policy-test": "node --test release/policy.test.mjs release/registry.test.mjs"
   },
   "devDependencies": {
     "react": "^19.1.1",
